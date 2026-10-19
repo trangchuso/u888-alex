@@ -1,0 +1,644 @@
+/* =========================================
+   1. THIẾT LẬP CƠ BẢN (CHUNG)
+   ========================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    padding-bottom: 60px; /* Để trống cho mobile nav dưới đáy */
+}
+
+/* Các tiện ích ẩn hiện mặc định (Trên Mobile) */
+.desktop-only { display: none; }
+.desktop-only-section { display: none; }
+.desktop-nav { display: none; }
+.mobile-only { display: block; }
+
+/* =========================================
+   2. GIAO DIỆN ĐIỆN THOẠI (MOBILE FIRST)
+   ========================================= */
+
+/* --- Header Mobile --- */
+.header {
+    background-image: url('images/headermb.gif'); 
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding: 15px;
+    min-height: 70px; 
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; 
+}
+
+.logo img {
+    max-width: 80%; 
+    height: 40px; 
+    object-fit: contain; 
+    position: static; 
+    right: auto;
+    left: auto;
+    top: auto;
+}
+
+/* --- Banner Slider --- */
+.banner-slider {
+    width: 100%;
+    overflow: hidden; 
+    position: relative;
+    background-color: #000; 
+}
+.banner-track {
+    display: flex;
+    width: 100%;
+    transition: transform 0.5s ease-in-out; 
+}
+.banner-img {
+    width: 100%;
+    flex-shrink: 0; 
+    object-fit: cover;
+    display: block;
+}
+
+/* --- Thông báo chạy (News Ticker) --- */
+.news-ticker-container {
+    background-color: #1a1a1a; 
+    padding: 10px 15px; 
+    display: flex;
+    justify-content: center;
+}
+.news-ticker {
+    background-color: #333333; 
+    border: 1px solid #444;
+    border-radius: 8px; 
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; 
+    padding: 5px 10px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5); 
+}
+.ticker-left {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    padding-right: 10px;
+}
+.ticker-icon {
+    color: #ff9900; 
+    font-size: 18px;
+    margin-right: 8px;
+    text-shadow: 0 0 5px rgba(255, 153, 0, 0.5); 
+}
+.ticker-title { color: #66ccff; font-weight: bold; font-size: 14px; }
+.ticker-content { flex: 1; overflow: hidden; color: #cccccc; font-size: 13px; display: flex; align-items: center; }
+.ticker-content marquee { padding-top: 3px; }
+.ticker-right { padding-left: 10px; }
+.btn-ticker-all { background: linear-gradient(to bottom, #ff5500, #cc2200); color: white; border: 1px solid #ff3300; border-radius: 4px; padding: 4px 12px; font-size: 12px; cursor: pointer; white-space: nowrap; }
+
+/* Ẩn nút "Tất cả" của thông báo chạy trên Mobile */
+@media (max-width: 767px) {
+    .ticker-right { display: none; }
+}
+
+/* --- Cụm nút Đăng Nhập / Đăng Ký Mobile --- */
+.mobile-auth-wrapper {
+    position: relative;
+    margin: 10px 15px 20px 15px; 
+}
+.mobile-auth-buttons {
+    display: flex;
+    width: 100%;
+    background-image: url('images/backgroudnut.png'); 
+    background-size: cover; 
+    background-position: center left; 
+    background-repeat: no-repeat;
+    border-radius: 25px; 
+    overflow: hidden; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.4); 
+}
+.mobile-auth-buttons button {
+    flex: 1; 
+    padding: 18px 0; 
+    border: none;
+    font-size: 15px;
+    font-weight: 600; 
+    background: transparent; 
+    cursor: pointer;
+    position: relative;
+    z-index: 2; 
+}
+.btn-register-mobile { color: #ffffff; padding-right: 30px !important; letter-spacing: 0.5px; }
+.btn-login-mobile { color: #ff3300; padding-left: 10px !important; letter-spacing: 0.5px; }
+
+/* --- Thanh Danh Mục Mobile --- */
+.mobile-category-slider {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 0 5px;
+}
+.nav-arrow { background: transparent; border: none; cursor: pointer; padding: 0 5px; flex-shrink: 0; }
+.nav-arrow img { height: 18px; width: auto; }
+.category-track {
+    display: flex; flex: 1; overflow-x: auto; scroll-behavior: smooth; gap: 24px; padding: 5px 0;
+    -ms-overflow-style: none; scrollbar-width: none;
+}
+.category-track::-webkit-scrollbar { display: none; }
+.cat-item {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    width: 65px; height: 75px; flex-shrink: 0; 
+    background-image: url('images/n1.png'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center;
+    border-radius: 8px; cursor: pointer;
+}
+.cat-item i { font-size: 24px; color: #000; margin-bottom: 4px; }
+.cat-item span { font-size: 12px; font-weight: bold; color: #333; text-transform: uppercase; }
+.cat-item.active { background-image: url('images/n2.png'); }
+.cat-item.active i { color: #fff; text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
+.cat-item.active span { color: #fff; }
+
+/* --- Lưới Thẻ Game Mobile --- */
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px;
+    margin-bottom: 25px;
+    padding: 0 10px; 
+}
+.game-card {
+    position: relative; 
+    border: 1px solid #ff7733; 
+    border-radius: 12px; 
+    overflow: hidden; 
+    display: block; 
+    text-decoration: none; 
+    box-shadow: 0 3px 5px rgba(0,0,0,0.5); 
+}
+.game-card img { width: 100%; height: auto; display: block; }
+.card-title {
+    position: absolute; bottom: 0; left: 0; width: 100%;
+    background-color: #b30000; color: #ffffff; font-size: 11px; font-weight: bold;
+    padding: 6px 2px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; 
+}
+
+/* --- Tải Ứng Dụng Mobile --- */
+.mobile-download-section {
+    background-color: #222222; 
+    padding: 20px 15px 40px 15px; 
+    border-top: 1px solid #444;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+}
+.mobile-slogan-box { width: 100%; text-align: center; margin-bottom: 25px; }
+.mobile-slogan-box img { width: 90%; max-width: 400px; height: auto; }
+.mobile-app-container { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 30px; }
+.mobile-app-col { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 5px; }
+.os-icon-lg { width: 70px; height: 70px; margin-bottom: 12px; }
+.app-instruction { color: #ffffff; font-size: 9px; font-weight: bold; line-height: 1.4; margin-bottom: 15px; }
+.btn-download-red { background: linear-gradient(to bottom, #ff5500, #cc2200); color: #ffffff; border: 1px solid #ff3300; border-radius: 20px; padding: 6px 30px; font-size: 13px; font-weight: bold; cursor: pointer; margin-bottom: 12px; }
+.store-badge-lg { width: 130px; height: auto; border-radius: 6px; }
+.red-divider { width: 2px; height: 130px; background-color: #ff0000; margin: 0 10px; }
+.official-partner-btn { position: relative; width: 80%; max-width: 300px; display: flex; justify-content: center; align-items: center; }
+.partner-bg { width: 100%; height: auto; display: block; }
+.partner-text { position: absolute; color: #ffffff; font-weight: bold; font-size: 14px; z-index: 2; }
+
+/* --- Tin Tức Mobile --- */
+.mobile-news-section {
+    background-color: #222222;
+    padding: 20px 10px 80px 10px; 
+}
+.news-header { position: relative; width: 100%; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
+.news-header-bg { width: 100%; height: auto; display: block; }
+.news-header-text {
+    position: absolute; color: #ffffff; font-weight: bold; font-size: 15px;
+    background: linear-gradient(to bottom, #ff3300, #cc0000); 
+    padding: 6px 45px; border-radius: 20px; box-shadow: 0 3px 5px rgba(0,0,0,0.5); z-index: 2;
+}
+.news-container { background-color: #ff3300; border-radius: 8px; padding: 12px; border: 2px solid #cc0000; }
+.news-item { display: flex; text-decoration: none; align-items: flex-start; }
+.news-thumb { width: 45%; flex-shrink: 0; margin-right: 12px; }
+.news-thumb img { width: 100%; height: auto; border-radius: 4px; display: block; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+.news-content { flex: 1; }
+.news-title { font-size: 13px; font-weight: bold; color: #ffffff; margin: 0 0 5px 0; line-height: 1.2; }
+.text-yellow { color: #ffd700; }
+.news-excerpt {
+    font-size: 11px; color: #ffffff; line-height: 1.35; text-align: justify; margin: 0;
+    display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden;
+}
+.news-divider { height: 1px; background-color: #b30000; margin: 12px 0; }
+
+/* --- Thanh Bottom Nav Mobile --- */
+.mobile-bottom-nav {
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%; 
+    background: linear-gradient(to bottom, #333333, #111111); /* Nền gradient xám đen */
+    display: flex;
+    justify-content: space-around; 
+    align-items: center;
+    padding: 8px 0; 
+    border-top: 1px solid #444; 
+    z-index: 1000;
+    
+    /* Bo nhẹ 2 góc trên giống bản gốc */
+    border-top-left-radius: 15px; 
+    border-top-right-radius: 15px;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
+}
+
+.nav-item { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none; /* Bỏ gạch chân của thẻ a */
+    font-size: 12px; 
+    color: #888888; 
+    font-weight: bold;
+}
+
+/* Đổi màu chữ sang cam đỏ khi được active */
+.nav-item.active { 
+    color: #ff4d00; 
+}
+
+/* Thiết lập khung hiển thị Icon (CSS Sprite) */
+.nav-icon {
+    width: 35px; 
+    height: 35px;
+    margin-bottom: 4px;
+    
+    /* Kéo giãn ảnh gấp đôi theo chiều dọc vì mỗi file chứa 2 trạng thái */
+    background-size: 100% 200%; 
+    
+    /* Mặc định hiển thị nửa trên (xám) */
+    background-position: top; 
+    background-repeat: no-repeat;
+    transition: background-position 0.2s; /* Hiệu ứng chuyển màu mượt */
+}
+
+/* Khi có class .active, trượt hình nền để hiển thị nửa dưới (màu cam) */
+.nav-item.active .nav-icon {
+    background-position: bottom;
+}
+
+/* Gắn link ảnh tương ứng cho từng Icon */
+.icon-home { background-image: url('images/home.c604aef946d597f9.png'); }
+.icon-cashback { background-image: url('images/discount.893c76d8f933c227.png'); }
+.icon-promo { background-image: url('images/promotion.f01439079b1c2cb8.png'); }
+.icon-cskh { background-image: url('images/chat.c12f24cf66718e55.png'); }
+.icon-account { background-image: url('images/user.94651c996b00dff5.png'); }
+
+/* =========================================
+   3. GIAO DIỆN MÁY TÍNH (PC - Tablet ngang)
+   ========================================= */
+@media (min-width: 768px) {
+    /* Đảm bảo chừa padding trên cho header cố định */
+    body { padding-bottom: 0; padding-top: 105px; background-color: #111; }
+    
+    /* ẨN TẤT CẢ CÁC THÀNH PHẦN MOBILE TRÊN PC */
+    .mobile-bottom-nav, 
+    .mobile-only, 
+    .mobile-category-slider, 
+    .game-grid, 
+    .mobile-download-section, 
+    .mobile-news-section { 
+        display: none !important; 
+    }
+    
+    /* HIỆN CÁC THÀNH PHẦN PC */
+    .desktop-only { display: flex; }
+    .desktop-nav { display: block; }
+    .desktop-only-section { display: block; }
+    
+    /* --- Header PC (Ghim cố định) --- */
+    .header { 
+        background-image: url('images/headerpc.gif'); 
+        background-size: cover; background-position: center top; padding: 30px 30px; 
+        display: flex; justify-content: space-between; align-items: center; 
+        min-height: 105px; 
+        position: fixed; top: 0; left: 0; width: 100%; z-index: 9999; 
+    }
+    .header-left, .header-right { display: flex; flex: 1; }
+    .logo { flex: 1; display: flex; justify-content: center; position: relative; left: -350px; }
+    .logo img { height: 60px; object-fit: contain; }
+    .header-right { justify-content: flex-end; align-items: center; gap: 25px; position: relative; right: 360px; }
+    
+    /* Cụm icon và nút PC */
+    .header-icons { display: flex; gap: 15px; }
+    .icon-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #F31103; font-size: 16px; font-weight: bold; }
+    .icon-item i { font-size: 22px; margin-bottom: 3px; }
+    .icon-item:hover { opacity: 0.8; }
+    .auth-buttons { display: flex; gap: 10px; }
+    .auth-buttons button { padding: 12px 28px; border-radius: 20px; font-weight: bold; font-size: 12px; border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+    .btn-login { background: linear-gradient(180deg, #ff4d4d, #F12F08); color: #fff; }
+    .btn-register { background: linear-gradient(180deg, #f5f5f5, #999999); color: #000; }
+    .btn-trial { background: linear-gradient(180deg, #ff4d4d, #F12F08); color: #fff; }
+
+    /* Thanh Menu PC */
+    .desktop-nav { background: linear-gradient(to bottom, #333333, #1a1a1a); border-top: 1px solid #444; border-bottom: 1px solid #000; }
+    .desktop-nav ul { list-style: none; display: flex; justify-content: center; padding: 0; margin: 0; }
+    .desktop-nav a { display: flex; flex-direction: column; align-items: center; justify-content: center; color: #e0e0e0; text-decoration: none; font-size: 14px; font-weight: bold; padding: 12px 18px; transition: color 0.3s; }
+    .desktop-nav a i { font-size: 22px; margin-bottom: 6px; }
+    .desktop-nav a:hover, .desktop-nav a.active { color: #ff3300; }
+
+    .main-content { padding: 30px 50px; }
+    
+    /* Tin tức chạy PC */
+    .news-ticker-container { padding: 15px 30px; }
+    .ticker-title { font-size: 15px; }
+    .ticker-content { font-size: 14px; }
+    
+    /* --- Đối tác thương hiệu PC --- */
+    .desktop-only-section { padding: 40px 0; background-color: #1a1a1a; }
+    .partners-title { text-align: center; margin-bottom: 30px; }
+    .partners-title img { height: 35px; object-fit: contain; }
+    .partners-content { position: relative; width: 1000px; margin: 0 auto; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+    .partners-image-box { width: 100%; display: block; }
+    .partners-image-box img { width: 100%; height: auto; display: block; border-radius: 15px; }
+    .partners-video-box { position: absolute; top: 8%; right: 2%; width: 48%; height: 84%; display: flex; justify-content: center; align-items: center; }
+    .partners-video-box video { width: 100%; height: 100%; object-fit: cover; border: 1px solid #555; border-radius: 8px; background-color: #000; }
+    
+    /* --- Dịch vụ chất lượng cao PC --- */
+    .services-section { padding: 40px 0; background-color: #1a1a1a; max-width: 1200px; margin: 0 auto; }
+    .services-title { text-align: center; margin-bottom: 40px; }
+    .services-title img { height: 35px; object-fit: contain; }
+    .services-grid { display: flex; justify-content: space-between; gap: 20px; }
+    .service-item { flex: 1; display: flex; justify-content: center; transition: transform 0.3s ease; }
+    .service-item img { width: 100%; max-width: 260px; height: auto; object-fit: contain; display: block; filter: drop-shadow(0 5px 15px rgba(255, 50, 0, 0.2)); }
+    .service-item:hover { transform: translateY(-10px); }
+    
+    /* --- Sảnh trò chơi PC --- */
+    .game-lobby-section { padding: 40px 0; background-color: #1a1a1a; }
+    .lobby-title { text-align: center; margin-bottom: 20px; }
+    .lobby-title img { height: 40px; object-fit: contain; }
+    .lobby-content { background-image: url('images/t1.png'); background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; width: 1200px; margin: 0 auto; padding: 40px 50px; box-sizing: border-box; }
+    .lobby-text-col { width: 30%; color: white; }
+    .lobby-heading { font-size: 45px; font-weight: 900; margin-bottom: 15px; letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
+    .lobby-cashback { margin-bottom: 15px; }
+    .lobby-cashback img { max-width: 200px; height: auto; }
+    .lobby-description { font-size: 13px; line-height: 1.6; text-align: justify; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+    .lobby-center-img { width: 45%; display: flex; justify-content: center; }
+    .lobby-center-img img { width: 100%; max-width: 450px; height: auto; display: block; }
+    .lobby-icons-col { width: 20%; display: flex; justify-content: flex-end; }
+    .lobby-icons-col img { max-width: 180px; height: auto; }
+    
+    /* --- Footer PC --- */
+    .footer-section { background-color: #111111; padding: 40px 0 20px 0; border-top: 1px solid #333; color: #cccccc; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; padding: 0 30px; }
+    .footer-left { width: 50%; padding-right: 40px; }
+    .footer-logo-slogan img { max-width: 350px; height: auto; margin-bottom: 20px; }
+    .footer-description { font-size: 13px; line-height: 1.6; text-align: justify; margin-bottom: 30px; }
+    .footer-ambassadors img { width: 100%; max-width: 450px; height: auto; }
+    .footer-right { width: 45%; display: flex; flex-direction: column; justify-content: space-between; }
+    .footer-apps { display: flex; justify-content: center; align-items: flex-start; margin-bottom: 30px; }
+    .app-divider { width: 1px; background-color: #555; height: 120px; margin: 0 30px; }
+    .app-download-box { display: flex; flex-direction: column; align-items: center; text-align: center; width: 160px; }
+    .os-icon { width: 45px; height: 45px; margin-bottom: 10px; }
+    .app-download-box p { font-size: 10px; line-height: 1.4; margin-bottom: 15px; color: #aaa; }
+    .btn-download { background-color: transparent; border: 1px solid #ff3300; color: #ff3300; padding: 5px 25px; border-radius: 20px; font-size: 12px; font-weight: bold; cursor: pointer; margin-bottom: 10px; transition: all 0.3s; }
+    .btn-download:hover { background-color: #ff3300; color: #fff; }
+    .store-badge { width: 110px; height: auto; }
+    .footer-certifications { margin-top: auto; }
+    .footer-certifications img { width: 100%; max-width: 500px; height: auto; }
+    .footer-bottom-links { text-align: center; margin-top: 50px; margin-bottom: 15px; }
+    .footer-bottom-links a { color: #aaa; text-decoration: none; font-size: 12px; transition: color 0.3s; }
+    .footer-bottom-links a:hover { color: #fff; }
+    .footer-bottom-links .separator { color: #555; margin: 0 15px; font-size: 12px; }
+    .footer-copyright { text-align: center; font-size: 12px; color: #777; }
+}
+/* =========================================
+   CSS CHO CỬA SỔ POPUP ĐĂNG NHẬP / ĐĂNG KÝ
+   ========================================= */
+.auth-modal {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); z-index: 100000; overflow-y: auto;
+}
+
+/* Định dạng cơ bản cho cả 2 khối */
+.auth-modal-content {
+    background-color: #1a1a1a; border: 2px solid #ff7700; border-radius: 12px;
+    margin: 5% auto; position: relative; width: 90%; max-width: 850px; overflow: hidden; box-shadow: 0 0 20px rgba(255, 100, 0, 0.4);
+}
+/* Nút X đóng cửa sổ */
+.close-modal { 
+    position: absolute; 
+    top: 15px; 
+    right: 15px; 
+    color: #fff; 
+    font-size: 20px; 
+    background-color: transparent; /* Nền trong suốt hoặc màu #333 tùy bạn */
+    border: 1px solid #fff; 
+    border-radius: 50%; 
+    width: 30px; 
+    height: 30px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    cursor: pointer; 
+    z-index: 9999; /* Cực kỳ quan trọng: Ép nút X nổi lên trên cùng */
+}
+
+/* Thêm hiệu ứng hover */
+.close-modal:hover { 
+    background-color: #ff3300; 
+}
+/* Các thành phần Form dùng chung */
+.input-group { margin-bottom: 12px; position: relative; }
+.input-group label { display: block; color: #ff6600; font-size: 11px; margin-bottom: 5px; font-weight: bold; }
+.red-star { color: #ff0000; }
+.input-group input { width: 100%; padding: 10px 15px; background-color: #444; border: 1px solid #555; border-radius: 20px; color: #fff; font-size: 13px; outline: none; }
+.show-pass { position: absolute; right: 15px; top: 32px; color: #aaa; cursor: pointer; }
+.checkbox-group { display: flex; align-items: center; margin-bottom: 15px; font-size: 11px; color: #ccc; }
+.checkbox-group input { margin-right: 8px; }
+
+.btn-submit-orange, .btn-switch-red { padding: 12px; border-radius: 25px; border: none; color: #fff; font-weight: bold; font-size: 14px; cursor: pointer; position: relative; }
+.btn-submit-orange { background: linear-gradient(to bottom, #ff6600, #cc2200); }
+.btn-switch-red { background: linear-gradient(to bottom, #ff3300, #990000); }
+.badge-88k-modal { position: absolute; right: 15px; top: -10px; height: 35px; }
+
+/* -------------------------------------
+   GIAO DIỆN MÁY TÍNH (Mặc định ẩn, bật lên ở @media)
+-------------------------------------- */
+.auth-desktop-only { display: none; }
+
+/* -------------------------------------
+   GIAO DIỆN ĐIỆN THOẠI (Mobile First)
+-------------------------------------- */
+.auth-mobile-only { 
+    display: flex; 
+    flex-direction: column; 
+    background: #000; 
+    border-color: #ff3300; 
+}
+
+/* Phần trên chứa Logo và Ảnh Lazio */
+.auth-modal-top { 
+    /* Tạo nền đen với các đường vạch chéo màu cam đỏ mờ giống bản gốc */
+    background: 
+        linear-gradient(135deg, rgba(255, 51, 0, 0.15) 1px, transparent 1px) 0 0,
+        linear-gradient(135deg, transparent 50%, rgba(255, 51, 0, 0.05) 50%, rgba(255, 51, 0, 0.05) 51%, transparent 51%) 0 0,
+        #0a0a0a;
+    background-size: 80px 80px; 
+    
+    padding: 30px 15px 0 15px; /* Tăng padding trên để có khoảng trống cho nút X */
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    position: relative;
+    border-bottom: 2px solid #ff3300; /* Đường viền đỏ mỏng ngăn cách với form bên dưới */
+}
+
+/* Logo U888 ở trên cùng */
+.auth-modal-logo-mb { 
+    width: 90%; 
+    max-width: 320px; /* Tăng kích thước logo lên một chút cho cân đối */
+    margin-bottom: 25px; 
+}
+
+/* Khung chứa hình Lazio kéo giãn toàn bộ chiều ngang */
+.lazio-container-mb { 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+}
+
+/* Tấm ảnh ghép sẵn cầu thủ + chữ Lazio */
+.ambassador-img-lazio { 
+    width: 100%; 
+    max-width: 450px; 
+    height: auto; 
+    display: block; 
+}
+
+/* Đã xóa class .auth-divider-text vì không còn sử dụng text rời nữa */
+
+/* Phần dưới chứa Form */
+.auth-modal-bottom { 
+    padding: 20px; 
+    background: #1a1a1a; 
+}
+
+/* Các nút bấm ngang */
+.auth-btn-row { 
+    display: flex; 
+    gap: 10px; 
+    margin-bottom: 15px; 
+}
+.auth-btn-row button { 
+    flex: 1; 
+    padding: 10px; 
+    font-size: 12px; 
+}
+
+/* Các link hỗ trợ ở footer của form */
+.auth-footer-links { 
+    display: flex; 
+    justify-content: space-between; 
+    gap: 5px; 
+    margin-bottom: 15px; 
+}
+.auth-footer-links a { 
+    flex: 1; 
+    text-align: center; 
+    text-decoration: none; 
+    color: #ccc; 
+    font-size: 9px; 
+    border: 1px solid #444; 
+    padding: 8px 5px; 
+    border-radius: 8px; 
+}
+
+.cskh-link-center { 
+    text-align: center; 
+    margin-bottom: 20px; 
+}
+.cskh-link-center a { 
+    color: #ccc; 
+    text-decoration: none; 
+    font-size: 11px; 
+    border: 1px solid #444; 
+    padding: 6px 15px; 
+    border-radius: 15px; 
+}
+
+/* Nút tải app dưới đáy Form Mobile */
+.mobile-app-download-box { 
+    background: linear-gradient(to right, #660000, #330000); 
+    border-radius: 10px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px; 
+    color: white; 
+    text-align: center; 
+    font-weight: bold; 
+}
+.app-left, .app-right { 
+    background: #ff3300; 
+    padding: 8px; 
+    border-radius: 8px; 
+    font-size: 10px; 
+    width: 25%; 
+}
+.app-center { 
+    flex: 1; 
+    font-size: 14px; 
+}
+/* -------------------------------------
+   MEDIA QUERY CHO MÁY TÍNH
+-------------------------------------- */
+@media (min-width: 768px) {
+    .auth-mobile-only { display: none; } /* Ẩn khối Mobile */
+    .auth-desktop-only { display: flex; flex-direction: row; } /* Hiện khối Desktop */
+    
+    /* Cập nhật nền và cách căn lề cho phần bên trái của modal trên PC */
+    .auth-modal-left { 
+        width: 50%; 
+        padding: 30px; 
+        display: flex; 
+        flex-direction: column; 
+        justify-content: flex-start; /* Để logo nổi lên trên, thay vì cách đều */
+        align-items: center; 
+        
+        /* Nền đen với vạch kẻ chéo màu cam nhạt */
+        background: 
+            linear-gradient(135deg, rgba(255, 51, 0, 0.1) 1px, transparent 1px) 0 0,
+            linear-gradient(135deg, transparent 50%, rgba(255, 51, 0, 0.05) 50%, rgba(255, 51, 0, 0.05) 51%, transparent 51%) 0 0,
+            #0a0a0a;
+        background-size: 80px 80px; 
+    }
+    
+    .auth-modal-logo { 
+        width: 90%; 
+        max-width: 320px; 
+        margin-bottom: 30px; /* Thêm khoảng trống giữa logo và ảnh cầu thủ */
+    }
+    
+    .ambassador-img-pc { 
+        width: 100%; 
+        max-width: 380px; /* Tùy chỉnh kích thước ảnh nhân vật */
+    }
+    
+    /* ... (Giữ nguyên phần còn lại của CSS auth-modal-right) ... */
+    .auth-modal-right { width: 50%; padding: 30px; display: flex; flex-direction: column; justify-content: center; }
+    .auth-notice { text-align: center; font-size: 11px; color: #fff; margin-bottom: 15px; line-height: 1.4; }
+    .btn-submit-orange, .btn-switch-red { width: 100%; margin-bottom: 10px; }
+    .auth-switch-text { text-align: center; font-size: 12px; color: #fff; margin-top: 15px; }
+    .auth-switch-text span { color: #ff3300; cursor: pointer; font-weight: bold; }
+}
